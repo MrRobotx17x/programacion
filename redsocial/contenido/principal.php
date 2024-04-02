@@ -14,7 +14,7 @@ if ($_SESSION['pass'] != "1x01") {
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
-<body>
+<body class="w3-black">
     <div class="w3-top">
         <div class="w3-bar w3-blue">
             <a href="" class="w3-bar-item"><?php echo $_SESSION['usuario'] ?></a>
@@ -23,8 +23,9 @@ if ($_SESSION['pass'] != "1x01") {
         </div>
     </div><br> <br>
     <div class="w3-center">
-        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black w3-round w3-border">Open Animated Modal</button>
+        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black w3-round w3-border">COMENTAR</button>
     </div>
+    <br>
     <div id="id01" class="w3-modal">
         <div class="w3-modal-content w3-animate-zoom w3-card-6">
             <header class="w3-container w3-teal">
@@ -60,22 +61,24 @@ if ($_SESSION['pass'] != "1x01") {
     $consulta = mysqli_query($conn, "SELECT * FROM comentarios");
     while ($res = mysqli_fetch_array($consulta)) {
         $us = $res['usuario'];
-        $user = mysqli_query($conn,"SELECT avatar FROM usuarios WHERE usuario = '$us' ");
+        $user = mysqli_query($conn, "SELECT avatar FROM usuarios WHERE usuario = '$us' ");
         $avatar = mysqli_fetch_array($user);
     ?>
         <div class="w3-card-4">
-            <header class="w3-container w3-light-grey">
-                <h3> <?php echo $res['usuario']; ?>  </h3>
+            <header class="w3-container w3-blue">
+                <h3> <?php echo $res['usuario']; ?> </h3>
+                <img width="50px" src="avatar/<?php echo $avatar['avatar']; ?>" alt="Avatar" class="w3-left w3-circle">
             </header>
             <div class="w3-container">
-                <p>1 new friend request</p>
+                <p>
+                    <img class="w3-hover-sepia" style="width: 150px;" src="img/<?php echo $res['imagen']; ?>" alt="">
+                </p>
                 <hr>
-                <img width="100px" src="avatar/<?php echo $avatar['avatar']; ?>" alt="Avatar" class="w3-left w3-circle">
                 <p><?php echo $res['comentario']; ?></p>
             </div>
             <button class="w3-button w3-block w3-dark-grey">+ Connect</button>
-            <button class="w3-button w3-block w3-dark-grey">+ Connect</button>
         </div>
+        <br>
     <?php
     }
     ?>
